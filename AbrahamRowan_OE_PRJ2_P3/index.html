@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Page Details -->
+      <title>OE Prj2.3</title>
+      <link rel="icon" type="image/png" href="img/twotone_volume_up_white_24dp.png">
+      <meta name="author" content="Rowan Abraham">
+      <meta name="description" content="Text to speech synthesizer & speech recognition">
+      <meta name="keywords" content="p5.speech, tts, speech recognition">
+
+  <!-- FONTS -->
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- STYLESHEETS -->
+      <link rel="stylesheet" href="css/reset.css">
+      <link rel="stylesheet" href="css/skeleton.css">
+  </head>
+
+  <body onload="">
+    <div id="footer">
+    <div class="navButton active"><a href="index.html" class="active"><span class="material-icons">looks_one</span></a></div><navSpacer></navSpacer>
+    <div class="navButton inactive"><a href="sprint2.html" class="inactive"><span class="material-icons">looks_two</span></a></div><navSpacer></navSpacer>
+    <div id="title">Terminal Command: device interaction</div>
+    <div id="details">Interacting with devices using a vocal interface</div>
+    <div id="finePrint">Rowan Abraham</div>
+    </div>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" integrity="sha512-w1Bktzax55ZbjW5Mqjz8+mKz4KqRjEUU35Dpq/ath29yskKqIGwNIHiFNp03m/OiJWDXvdQ1/g6aV+l4PeVO7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.js" integrity="sha512-U2sgwrFhl+Tgx9iGH9h5Ba2WyIjyCes+D0prtIFw3a0V+/fkaeL5Cd/VjyPHno9kUPE1rnNhBGTyvtZsfJp0xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="js/p5.speech.js"></script>
+    <script>
+
+      alert("start by giving the device a number, this is so you can tell multiple devices to do different tasks. After that, you can target his device by saying \"device\" followed by the numger you gave it. try out using some of the commands below such as(device [number] change voice speed) and when you're ready you can even tell your device to \"read to me\" ");
+
+      var commandArray = [];
+
+      // var terminalCommandActive = false;
+      // var changingLights = false;
+      // var changingLight1 = false;
+      // var changingLight2 = false;
+      // var changingLight3 = false;
+
+      var deviceRegistered = false;
+      var deviceNumber = "";
+
+      voiceNumber = 10;
+      voiceSpeed = 50;
+      voicePitch = 50;
+      voiceVolume = 100;
+
+      colorRed = 255;
+      colorGreen = 255;
+      colorBlue = 255;
+
+      var voiceOutput = new p5.Speech(10);//'Google UK English Female'
+      voiceOutput.onStart = onSpeechStart;
+      voiceOutput.onEnd = onSpeechEnd;
+      var computerIsSpeaking = false;
+
+      var voiceInput = new p5.SpeechRec('en-us', parseResult);
+      voiceInput.continuous = true;
+      voiceInput.onEnd = restartDetection;
+      voiceInput.resultString = "";// just so it has a default if speak happens before parse
+      // voiceInput.interimResults = true; // allow partial recognition (faster, less accurate)
+
+      var readingscript = "Laugh, and the world laughs with you; Weep, and you weep alone; For the sad old earth must borrow its mirth, But has trouble enough of its own. Sing, and the hills will answer; Sigh, it is lost on the air; The echoes bound to a joyful sound, But shrink from voicing care. Rejoice, and men will seek you; Grieve, and they turn and go; They want full measure of all your pleasure, But they do not need your woe. Be glad, and your friends are many; Be sad, and you lose them all,— There are none to decline your nectared wine, But alone you must drink life’s gall. Feast, and your halls are crowded; Fast, and the world goes by. Succeed and give, and it helps you live, But no man can help you die. There is room in the halls of pleasure For a large and lordly train, But one by one we must all file on Through the narrow aisles of pain.";
+
+
+      setup = () => {
+        createCanvas(windowWidth, windowHeight * 0.78);
+        // background(255);
+        fill(0, 0, 0);
+        // textAlign(CENTER);
+
+        voiceNumber = 10; voiceOutput.setVoice(voiceNumber);
+        voicePitch = 50; voiceOutput.setPitch((((voicePitch * 2) - 10) / 100) + 0.1);
+        voiceSpeed = 50; voiceOutput.setRate((((voiceSpeed * 2) - 10) / 100) + 0.1);
+        voiceVolume = 100; voiceOutput.setVolume(voiceVolume / 100);
+
+        voiceOutput.speak('Please assign this device to a number');
+        voiceOutput.listVoices(); 
+        voiceInput.start();
+      }
+
+
+
+
+      draw = () => {
+        clear();
+        if(!isNaN(colorBlue)){
+          background(colorRed, colorGreen, colorBlue);
+        }
+        textSize(60);
+        textStyle(BOLD);
+        text("Device #"+deviceNumber, 25, 70);
+        textSize(40);
+        text("\"Device "+deviceNumber+"\" commands:", 25, 125);
+        textSize(20); textStyle(NORMAL);
+        text("\"change color\"   \"red\" "+colorRed+"  \"green\"  "+colorGreen+"  \"blue\"  "+colorBlue, 50, 160);
+        // text("\"change temperature\",  #", 50, 195);
+        text("\"change voice\"  #"+voiceNumber, 50, 195);
+        text("\"change voice pitch\" "+voicePitch+"%", 50, 230);
+        text("\"change voice volume\" "+voiceVolume+"%", 50, 265);
+        text("\"change voice speed\" "+voiceSpeed+"%", 50, 300);
+        text("\"clear\"", 50, 335);
+        text("\"reset\" (all values)", 50, 370);
+      }
+
+      
+
+      
+
+      function parseResult(){
+        // console.log("string(\""+voiceInput.resultString+"\")");
+        if(voiceInput.resultString.length > 0){
+          if(computerIsSpeaking == true){
+            // voiceInput.resultString = "";
+            computerIsSpeaking = false;
+          } else if(computerIsSpeaking == false){
+            voiceInputArray = voiceInput.resultString.split(' ');
+            for(let i = 0; i < voiceInputArray.length; i++){
+              commandArray.push(voiceInputArray[i]);
+            }
+            console.log("commandArray["+commandArray+"]");
+          }
+          registerDevice();
+          voiceInput.resultString = "";
+        }
+
+
+        if(commandArray[0] == "device" && commandArray[1] == deviceNumber && commandArray[2] == "change" && commandArray[3] == "colour"){
+          if(commandArray[4] == "red" && !isNaN(commandArray[5]) && commandArray[6] == "green" && !isNaN(commandArray[7]) && commandArray[8] == "blue" && !isNaN(commandArray[9])){
+            colorRed = commandArray[5];
+            colorGreen = commandArray[7];
+            colorBlue = commandArray[9];
+            // console.log("red("+colorRed+"), blue("+colorBlue+"), green("+colorGreen+")");
+            commandArray = [];
+          } else if(commandArray.length > 4){
+            // console.log("0 = "+commandArray[0] == "device");
+            // console.log("1 = "+commandArray[1] == deviceNumber);
+            // console.log("2 = "+commandArray[2] == "change");
+            // console.log("3 = "+commandArray[3] == "colour");
+            // console.log("4 = "+commandArray[4] == "red");
+            // console.log("5 = "+!isNaN(commandArray[5]));
+            // console.log("6 = "+commandArray[6] == "green");
+            // console.log("7 = "+!isNaN(commandArray[7]));
+            // console.log("8 = "+commandArray[8] == "blue");
+            // console.log("9 = "+!isNaN(commandArray[9]));
+            voiceOutput.speak("I didn't catch that, why don't we try that again?");
+            commandArray = [];
+          } else {
+            voiceOutput.speak("what are the RGB or percentage values of the new color?");
+          }
+        } else if(commandArray[0] == "device" && commandArray[1] == deviceNumber && commandArray[2] == "change" && commandArray[3] == "voice" && commandArray[4] == "pitch"){
+          if(commandArray[5] && !isNaN(commandArray[5])){
+            voicePitch = commandArray[5]; voiceOutput.setPitch((((voicePitch * 2) - 10) / 100) + 0.1);
+            voiceOutput.speak("voice pitch has been changed");
+            commandArray = [];
+          } else if(commandArray[5]){
+            
+            voiceOutput.speak("I didn't catch that, why don't we try that again?");
+            commandArray = [];
+          } else {
+            voiceOutput.speak("what is the percentage of the new pitch?");
+          }
+        } else if(commandArray[0] == "device" && commandArray[1] == deviceNumber && commandArray[2] == "change" && commandArray[3] == "voice" && commandArray[4] == "volume"){
+          if(commandArray[5] && !isNaN(commandArray[5])){
+            voiceVolume = commandArray[5]; voiceOutput.setRate((((voiceSpeed * 2) - 10) / 100) + 0.1);
+            voiceOutput.speak("voice volume has been changed");
+            commandArray = [];
+          } else if(commandArray[5]){
+            
+            voiceOutput.speak("I didn't catch that, why don't we try that again?");
+            commandArray = [];
+          } else {
+            voiceOutput.speak("what is the percentage of the new volume?");
+          }
+        } else if(commandArray[0] == "device" && commandArray[1] == deviceNumber && commandArray[2] == "change" && commandArray[3] == "voice" && commandArray[4] == "speed"){
+          if(commandArray[5] && !isNaN(commandArray[5])){
+            voiceSpeed = commandArray[5]; voiceOutput.setRate(((voiceSpeed - 10) / 100) + 0.1);
+            voiceOutput.speak("voice speed has been changed");
+            commandArray = [];
+          } else if(commandArray[5]){
+            
+            voiceOutput.speak("I didn't catch that, why don't we try that again?");
+            commandArray = [];
+          } else {
+            voiceOutput.speak("what is the percentage of the new speed?");
+          }
+        } else if(commandArray[0] == "device" && commandArray[1] == deviceNumber && commandArray[2] == "change" && commandArray[3] == "voice"){
+          if(commandArray[4] && !isNaN(commandArray[4])){
+            voiceNumber = commandArray[4]; voiceOutput.setVoice(voiceNumber);
+            voiceOutput.speak("Oh, so something more like this?");
+            commandArray = [];
+          } else if(commandArray[4]){
+            voiceOutput.speak("I didn't catch that, why don't we try that again?");
+            commandArray = [];
+          } else {
+            voiceOutput.speak("what is the number of the new voice?");
+          }
+        } else if(commandArray[commandArray.length - 2] == "device" && commandArray[commandArray.length - 1] == deviceNumber){
+          voiceOutput.speak("what would you like to do?");
+        } else if(commandArray[commandArray.length-1] == "reset"){
+          colorRed = 255; colorGreen = 255; colorBlue = 255;
+          voiceNumber = 10; voiceOutput.setVoice(voiceNumber);
+          voicePitch = 50; voiceOutput.setPitch((((voicePitch * 2) - 10) / 100) + 0.1);
+          voiceSpeed = 50; voiceOutput.setRate((((voiceSpeed * 2) - 10) / 100) + 0.1);
+          voiceVolume = 100; voiceOutput.setVolume(voiceVolume / 100);
+          commandArray = [];
+          voiceOutput.speak("device "+deviceNumber+" has been reset");
+        } else if(commandArray[commandArray.length-1] == "clear") {
+          commandArray = [];
+          voiceOutput.speak("cleared");
+        } else if(commandArray[0] == "device" && commandArray[1] == deviceNumber && commandArray[2] == "read" && commandArray[3] == "to" && commandArray[4] == "me"){
+          voiceOutput.speak(readingscript);
+          commandArray = [];
+        // } else if(commandArray[0] == "" || voiceInput.resultString == ""){
+        } else {
+          // voiceOutput.speak("I didn't recognize that");
+          voiceInput.resultString = "";
+          commandArray = [];
+        }
+        
+
+        // commandArray += voiceInput.resultString.split(' ');
+        // console.log(commandArray);
+        // if(){}
+        
+      }
+
+
+      function restartDetection(){
+        voiceInput.start();
+      }
+
+      function onSpeechStart(){
+        // console.log("onSpeechStart");
+        computerIsSpeaking = true;
+      }
+      function onSpeechEnd(){
+        console.log("onSpeechEnd");
+        voiceInput.resultString = "";
+        setTimeout(() => {
+          computerIsSpeaking = false;
+        }, 1000);
+        
+      }
+
+      function registerDevice(){
+        if(!deviceRegistered){
+          if(!isNaN(commandArray[commandArray.length - 1])){
+            deviceNumber = commandArray[commandArray.length - 1];
+            voiceOutput.speak("You have established this device as device number"+deviceNumber);
+            deviceRegistered = true;
+          } else if (commandArray.length > 0){
+            voiceOutput.speak("Please speak a number out loud to establish this device");
+          }
+          commandArray = [];
+          voiceInput.resultString = "";
+        }
+      }
+
+      function windowResized(){
+        resizeCanvas(windowWidth, windowHeight * 0.78);
+      }
+
+      function keyPressed(){
+        console.log("keyPressed("+key+")");
+        // if(key == ""){}
+      }
+      function keyReleased(){
+        console.log("keyReleased("+key+")");
+        // if(key == ""){}
+      }
+    </script>
+  </body>
+</html>
