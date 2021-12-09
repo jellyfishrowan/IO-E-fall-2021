@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Page Details -->
+      <title>OE Prj2.3</title>
+      <link rel="icon" type="image/png" href="img/twotone_volume_up_white_24dp.png">
+      <meta name="author" content="Rowan Abraham">
+      <meta name="description" content="Text to speech synthesizer & speech recognition">
+      <meta name="keywords" content="p5.speech, tts, speech recognition">
+
+  <!-- FONTS -->
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- STYLESHEETS -->
+      <link rel="stylesheet" href="css/reset.css">
+      <link rel="stylesheet" href="css/skeleton.css">
+  </head>
+
+  <body onload="">
+    <div id="footer">
+    <div class="navButton inactive"><a href="index.html" class="inactive"><span class="material-icons">looks_one</span></a></div><navSpacer></navSpacer>
+    <div class="navButton active"><a href="sprint2.html" class="active"><span class="material-icons">looks_two</span></a></div><navSpacer></navSpacer>
+    <div id="title">Infinite Hello</div>
+    <div id="details">A very useful web app that allows your devices to have a friendly conversation while you're away so they don't get lonely</div>
+    <div id="finePrint">Rowan Abraham</div>
+    </div>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" integrity="sha512-w1Bktzax55ZbjW5Mqjz8+mKz4KqRjEUU35Dpq/ath29yskKqIGwNIHiFNp03m/OiJWDXvdQ1/g6aV+l4PeVO7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.js" integrity="sha512-U2sgwrFhl+Tgx9iGH9h5Ba2WyIjyCes+D0prtIFw3a0V+/fkaeL5Cd/VjyPHno9kUPE1rnNhBGTyvtZsfJp0xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="js/p5.speech.js"></script> -->
+    <script>
+      setup = () => {}
+      draw = () => {}
+
+      function windowResized(){
+        resizeCanvas(windowWidth, windowHeight * 0.78);
+      }
+        
+      function keyPressed(){
+        console.log("keyPressed("+key+")");
+        // if(key == ""){}
+      }
+      function keyReleased(){
+        console.log("keyReleased("+key+")");
+        // if(key == ""){}
+      }
+
+      function mousePressed(){
+        // voiceOutput.speak("hello");
+      }
+    </script>
+  </body>
+</html>

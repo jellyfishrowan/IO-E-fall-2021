@@ -1,0 +1,356 @@
+/* -- Complete CSS Skeleton | Created by Monzilla Media for Perishable Press ---------- */
+/* -- Updated Aug 21st 2006 | Leave the footer credit complete and use at will -- */
+
+/* -- |x = deprecated -- */
+/* -- |n = navigator only -- */
+/* -- |e = explorer only -- */
+
+/* ---------- Modified by Rowan Abraham ---------- */
+
+	/* for info on selectors {"."A, "*"A, "#"A, ""A, A""B, A" "B, A","B, A">"B, A"+"B, A"~"B, etc...}
+	visit https://www.w3schools.com/cssref/css_selectors.asp */
+
+	/* Items are automatically commented out, comment in to use them */
+
+/* ---------- HEAD ---------- */
+
+/* !DOCTYPE {} */
+/* base {} */
+/* head {} */
+/* link {} */
+/* meta {} */
+/* title {} */
+
+/* ---------- MAIN ---------- */
+
+/* *, html *, body * {} */
+/* * {} */
+/* html {} */
+body {
+	width: 100vw; height: 100vh;
+	overflow: hidden;
+	font-size: 0px;
+	margin: 0%; padding: 0%;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#footer {
+	background-color: rgb(225,225,225);
+	position: absolute;
+	left: 0vw; 
+	width: 96vw;
+	bottom: 0vw; height: 22vh;
+	padding: 1vh 2vw 0vh 2vw;
+	box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.5);
+}
+
+navSpacer {
+	display: inline-block;
+	width: 2.55vw;
+}
+
+.navButton {
+	width: 5vh; height: 5vh; 
+	border-radius: 1vh;
+	text-align: center;
+	display: inline-block;
+	box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.5);
+}
+.navButton.inactive {
+	background-color: rgb(120,120,120);
+}
+.navButton.active {
+	background-color: rgb(0, 0, 0);
+}
+.navButton:hover {
+	box-shadow: 0px 0px 5px 2.5px rgba(0,0,0, 0.5);
+}
+button {
+	font-size: 0%;
+	padding: 0%;
+	border: none;
+	width: 5vh; height: 5vh; 
+	border-radius: 1vh;
+	text-align: center;
+	display: inline-block;
+	box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.5);
+}
+button.inactive {
+	background-color: rgb(120,120,120);
+}
+button.active {
+	background-color: rgb(0, 0, 0);
+}
+button:hover {
+	box-shadow: 0px 0px 5px 2.5px rgba(0,0,0, 0.5);
+}
+
+a .material-icons {
+	line-height: 5vh;
+	font-size: 5vh;
+	user-select: none;
+	text-decoration: none;
+}
+button .material-icons {
+	line-height: 5vh;
+	font-size: 5vh;
+	user-select: none;
+	text-decoration: none;
+}
+.inactive .material-icons {
+	color: rgb(200,200,200);
+}
+.active .material-icons {
+	color: white;
+}
+
+#title {
+	padding: 2vh 0vw 1vh 0vw;
+	font-size: 5vh; line-height: 5vh; font-weight: 700; font-style: normal;
+}
+#details {
+	height: 6vh;
+	padding-bottom: 1vh;
+	font-size: 2vh; line-height: 2.5vh; font-weight: 300; font-style: italic;
+}
+#finePrint {
+	text-align: right;
+	font-size: 1.75vh; line-height: 1.75vh; font-weight: 300;
+}
+
+/* div#name {} */
+/* div.name {} */
+/* div {} */
+/* span {} */
+
+/* ---------- TEXT ---------- */
+
+/* @font-face {
+	font-family: 'FONTNAME', SERIFSTYLE;
+	src: url("/font/A.ttf");
+	font-weight: normal;
+	font-style: normal;
+	font-size: medium;
+	font-stretch: normal;
+	font-kerning: normal;
+} */
+
+/* h1 {} */
+/* h2 {} */
+/* h3 {} */
+/* h4 {} */
+/* h5 {} */
+/* h6 {} */
+/* p {} */
+/* p:first-line {} */
+/* p:first-letter {} */
+
+/* h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {} */
+
+/* p:hover a:link, p:hover a:visited {} */
+/* p:hover a:hover, p:hover a:active {} */
+
+/* ---------- LISTS ---------- */
+
+/* ul {} */
+/* ol {} */
+/* li {} */
+/* ul li {} */
+/* ol li {} */
+/* ul ul, ul ol, ol ul, ol ol {} */
+/* ul li li {} */
+/* ol li li {} */
+
+/* li p, li li p {} */
+
+/* dl {} */
+/* dt {} */
+/* dd {} */
+
+/* ---------- IMAGES ---------- */
+
+/* img {} */
+/* img a {} */
+/* img a:hover {} */
+/* img.noborder {} */
+
+/* img.align-center, img[align="center"] {} */
+/* img.align-right, img[align="right"] {} */
+/* img.align-left, img[align="left"] {} */
+
+/* ---------- LINKS ---------- */
+
+/* a {} */
+/* a img {} */
+/* a:focus {} */
+/* a:link, a:visited {} */
+/* a:hover, a:active {} */
+
+/* a[href]:after {content: " | ";} */
+/* a[rel]:before { content: " * "; } */
+/* a[lang|="nl"] {} */
+/* a[title="common"] {} */
+/* area {} */
+/* map {} */
+
+/* ---------- FORMS ---------- */
+
+/* fieldset {} */
+/* textarea {} */
+/* textarea:hover {} */
+
+/* optgroup {} */
+/* option {} */
+/* select {} */
+
+/* button:hover {} */
+/* button {} */
+/* legend {} */
+/* label {} */
+
+/* input {} */
+/* input:focus {} */
+/* input:hover {} */
+/* input[type=submit], input[type=reset], input[type=button] {} */
+/* input[type=text]:focus, textarea:focus, select:focus {} */
+/* form input[type=text] {} */
+/* form {} */
+
+/* ---------- STYLES ---------- */
+
+/* blockquote {} */
+/* blockquote p {} */
+/* blockquote cite {} */
+
+/* pre {} */
+/* code {} */
+/* p code {} */
+/* pre code {} */
+
+/* kbd {} */
+/* samp {} */
+/* cite {} */
+/* abbr {} */
+/* acronym {} */
+/* address {} */
+
+/* hr {} */
+/* br {} */
+/* wbr {} */
+/* nobr {} */
+
+/* strong {} */
+/* small {} */
+/* sub {} */
+/* sup {} */
+/* big {} */
+/* em {} */
+/* i {} */
+/* b {} */
+/* q {} */
+/* tt {} */
+/* del {} */
+/* ins {} */
+/* var {} */
+
+/* basefont|x {} */
+/* isindex|x {} */
+/* strike|x {} */
+/* center|x {} */
+/* font|x {} */
+/* menu|x {} */
+/* dir|x {} */
+/* u|x {} */
+/* s|x {} */
+
+/* comment|e {} */
+/* marquee|e {} */
+/* ruby|e {} */
+/* rt|e {} */
+
+/* spacer|n {} */
+/* server|n {} */
+/* ilayer|n {} */
+/* keygen|n {} */
+/* layer|n {} */
+/* blink|n {} */
+
+/* ---------- TABLES ---------- */
+
+/* table {} */
+/* th {} */
+/* tr {} */
+/* td {} */
+
+/* colgroup {} */
+/* caption {} */
+/* col {} */
+
+/* tbody {} */
+/* thead {} */
+/* tfoot {} */
+
+/* multicol|n {} */
+
+/* ---------- FRAMES ---------- */
+
+/* frame {} */
+/* frameset {} */
+/* noframes {} */
+
+/* ---------- CLASSES ---------- */
+
+/* .hide {display: none;} */
+/* .show {display: block;} */
+
+/* .right {float: right;} */
+/* .left {float: left;} */
+
+/* .vert-align {vertical-align: middle;} */
+/* .center {text-align: center;} */
+
+/* .clear { display: block; clear: both; height: 1%; margin: 0; padding: 0; font-size: 1px; line-height: 1px;} */
+
+/* .background {background-color: auto;  background-image: auto; background-repeat: auto; background-attachment: auto; background-position: auto;} */
+/* .nobackground {background: none;} */
+/* .skipnav {position: absolute; height: 0.1em; left: -9999px; top: -9999px;} */
+/* .noborder {border: 0 none;} */
+
+/* ---------- MEDIA ---------- */
+
+/* embed {} */
+/* param {} */
+/* object {} */
+/* applet|x {} */
+/* bgsound|e {} */
+
+/* ---------- SCRIPTS ---------- */
+
+/* script {} */
+/* noscript {} */
+
+/* ---------- HACKS ---------- */
+
+div.clearfix:after {
+	content: ".";
+	visibility: hidden;
+	display: block;
+	clear: both;
+	height: 0;
+}
+
+div.clearfix { display: inline-table; }
+
+/* Hides from IE-mac \*/
+	* html div.clearfix { height: 1%; }
+	div.clearfix { display: block; }
+/* End hide from IE-mac */
+
+/* -- END FILE -- */
+
+/* -- Complete CSS Skeleton | Created by Monzilla Media for Perishable Press -- */
+/* -- Updated Aug 21st 2006 | Leave this footer credit complete and use at will -- */
+
+::-webkit-scrollbar {
+    display: none;
+}
